@@ -4,9 +4,9 @@ import env from "dotenv";
 env.config();
 const db = new pg.Client({
     host : "localhost",
-    user: "postgres",
+    user: process.env.SQL_USER,
     database : process.env.SQL_SECRET,
-    password : "11201_VivekBhalke",
+    password : process.env.SQL_PASSWORD,
     port : 5432
 })
 export default  db; 
