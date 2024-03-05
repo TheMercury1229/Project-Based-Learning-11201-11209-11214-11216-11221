@@ -1,25 +1,63 @@
 import React from "react";
 import "./Navbar.css";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
-import profileImg from "../../assets/Profileimage.webp";
+import { FaHome, FaUser } from "react-icons/fa";
+import { FaChartLine } from "react-icons/fa";
+import { IoSettings } from "react-icons/io5";
+import { FaGraduationCap } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const Navbar = () => {
+  const navLinks = [
+    {
+      name: "Home",
+      icon: <FaHome />,
+      link: "/",
+    },
+    {
+      name: "Attendance",
+      icon: <FaChartLine />,
+      link: "/attendance",
+    },
+    {
+      name: "Marks",
+      icon: <FaGraduationCap />,
+      link: "/marks",
+    },
+    {
+      name: "Profile",
+      icon: <FaUser />,
+      link: "/profile",
+    },
+    {
+      name: "Settings",
+      icon: <IoSettings />,
+      link: "/settings",
+    },
+  ];
   return (
-    <div className="navbar">
-      <ul className="nav-list">
-        <li className="nav-links">
-          <button>
-            <MdDarkMode className="darkIcon" />
-            <MdLightMode className="lightIcon" />
-          </button>
-        </li>
-        <li className="nav-links">
-          <Link to="/profile" title="Go To Profile Page">
-            <img src={profileImg} className="avatar" />
-          </Link>
-        </li>
-      </ul>
-    </div>
+    <header>
+      <div class="logo" title="GradeEdu">
+        <Logo />
+      </div>
+      <nav class="navbar">
+        <ul>
+          {navLinks.map((item, i) => {
+            <li key={i}>
+              <Link to={item.link}>
+                <span>{item.icon}</span>
+                <h3>{item.title}</h3>
+              </Link>
+            </li>;
+          })}
+        </ul>
+      </nav>
+      <div id="profile-btn">
+        <span class="material-icons-sharp">person</span>
+      </div>
+      <div class="theme-toggler">
+        <span class="material-icons-sharp active">light_mode</span>
+        <span class="material-icons-sharp">dark_mode</span>
+      </div>
+    </header>
   );
 };
 
