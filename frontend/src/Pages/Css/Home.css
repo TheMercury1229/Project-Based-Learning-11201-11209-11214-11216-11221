@@ -1,0 +1,15 @@
+.home{
+    display: flex;
+    width: 100%;
+}
+.container{
+    flex:5;
+    padding-inline: 20px;
+}
+.time-table{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}

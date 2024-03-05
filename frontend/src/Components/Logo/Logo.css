@@ -1,0 +1,19 @@
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+    gap: 5px;
+    font-size: 18px;
+    color: #111;
+    font-weight: 600;
+    border-bottom: 1px solid #b6b1b1;
+    user-select: none;
+    cursor: pointer;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}

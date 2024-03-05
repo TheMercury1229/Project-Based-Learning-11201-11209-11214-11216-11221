@@ -1,0 +1,25 @@
+*,
+*::before,
+*::after{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: 'Poppins';
+}
+body{
+    background-color:whitesmoke;
+    color:#333;
+}
+li{
+    list-style: none;
+}
+.bold-text{
+    font-weight: 700;
+    color: #111;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
