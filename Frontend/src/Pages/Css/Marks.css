@@ -1,0 +1,10 @@
+h1{
+    margin-top: 20px;
+
+}
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.6rem;
+    margin-bottom: 20px;
+}
