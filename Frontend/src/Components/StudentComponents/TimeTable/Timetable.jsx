@@ -9,16 +9,9 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const TimeTable = () => {
   const timetableData = useRecoilValue(timeTableStudentState);
-  console.log("the time table data is : ");
-  console.log(timetableData);
-  // const setTimeTableData = useSetRecoilState(timeTableStudentState)
-  console.log(timetableData);
   const daysOfWeek = Object.keys(timetableData);
-  console.log(daysOfWeek);
-  // console.log("days of week is ",daysOfWeek);
   const date = new Date();
   const day = date.getDay();
-  console.log(day);
   const [currentDay, setCurrentDay] = useState(day-1);
 
   const handlePrevDay = () => {
@@ -33,7 +26,7 @@ const TimeTable = () => {
     );
   };
   const nameOfDay = daysOfWeek[currentDay];
-  console.log("name of the day is : " , nameOfDay);
+  // console.log("name of the day is : " , nameOfDay);
   let currentTimetable;
   if(nameOfDay == 'Monday')
   {

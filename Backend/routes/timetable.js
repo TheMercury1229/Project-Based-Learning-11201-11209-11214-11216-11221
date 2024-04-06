@@ -69,6 +69,11 @@ router.get("/getTimeTable" , tokenVerify ,async (req,res)=>{
             },
           ]
           result.Saturday = saturday;
+          result.Sunday = [{
+            time: "",
+            roomNumber:"No class on Sunday.",
+            subject: ""
+          }] 
         return  res.json({timeTable : result});
     } catch (error) {
         return res.json({message : "error"});
