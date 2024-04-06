@@ -1,0 +1,15 @@
+/* .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 690px;
+    margin-block:  20px;
+
+} */
+.middle{
+    margin-bottom: 20px;
+}
+.bottom{
+    margin-bottom: 40px;
+    margin-left: auto;
+}

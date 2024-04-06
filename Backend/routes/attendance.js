@@ -15,13 +15,13 @@ async function getsubjectAttendance( rollno  , subject_name){
         try {
             const data = await db.query('SELECT * FROM attendance_real JOIN subjects ON attendance_real.subject_id = subjects.subject_id WHERE rollno = $1 AND subjects.subject_name = $2' , [rollno , subject_name])
             const subject_id = data.rows[0];
-            console.log(subject_id);
+            // console.log(subject_id);
             const attended = parseInt(subject_id.attended);
             // const attended = 0;
             const conducted = parseInt(subject_id.conducted);
-            console.log(Math.ceil((attended/conducted)*100));
+            // console.log(Math.ceil((attended/conducted)*100));
             // const conducted = 0;
-            console.log("hi there")
+            // console.log("hi there")
             const object = {
                 attended : attended,
                 conducted:conducted,
@@ -220,5 +220,99 @@ router.get("/getAllSubjectAttendance",tokenVerify ,async (req,res)=>{
         console.log(result)
         return res.json({data :result});
     }
+});
+
+router.post("/dataOfTeacherAttendance" , tokenVerify, async (req,res)=>{
+    const teacher_id = req.headers.user_id;
+    const subjects = req.body.subjects;
+    
+    if(teacher_id || subjects){
+        let array = [];
+        for(var j = 0 ;j < subjects.length;j++)
+        {
+            let subject = subjects[j];
+            let object = [];
+            for(var i = 11201;i<=11265;i++)
+            {
+                let thisOne = {};
+                if(i!=11204 && i!=11211)
+                {
+                try {
+                        thisOne.id = i;
+                        let subjectAttendance = await getsubjectAttendance(i,subject);
+                        thisOne.attendance = subjectAttendance.attendance;
+                        const data = await db.query("SELECT fname FROM students WHERE  rollno = $1",[i]);
+                        
+                        thisOne.name = data.rows[0].fname;
+                        let defaulter = await db.query("SELECT isdefaulter FROM defaulter WHERE rollno = $1",[i]);
+                        let trueOrFalse = defaulter.rows[0].isdefaulter;
+                        // console.log(trueOrFalse);
+                        if(trueOrFalse)
+                        {
+                            thisOne.msg = "Defaulter"
+                        }
+                        else{
+                            thisOne.msg = "Clear";
+                        }
+                        
+                } catch (error) {
+                        return res.json({message : error})
+                }
+
+                object.push(thisOne);
+                }
+            }
+            array.push(object);
+        }
+        return res.json({data:array});
+    }else{
+        return res.json({message : "please give all credentials"})
+    }
+
+})
+
+router.post("/teacherMarkAttendance" , tokenVerify , async (req,res)=>{
+    const students = req.body.students;
+    const subject  = req.body.subject;
+    if(!students  || !subject)
+    {
+        return res.status(400).send('Please provide all details')
+    }
+    let absentStudents = students.map((rollno , index)=>{
+        return parseInt(rollno)
+    })
+    for(var i = 11201;i<=11265;i++)
+    {
+        if((i!=11204 && i!=11211) )
+        {
+           if(absentStudents.includes(i))
+           {
+                try {
+                    const data = await db.query("SELECT subject_id FROM subjects WHERE subject_name = $1" , [subject])
+                    const subject_id = data.rows[0].subject_id;
+                    const result = await db.query("UPDATE attendance_real SET conducted = conducted + 1 WHERE rollno = $1 AND subject_id = $2",[i,subject_id]);
+                    
+                } catch (error) {
+                    return res.json({message : "something went wrong"})
+                }
+            //absent studnet
+           }
+           else{
+                try {
+                    const data = await db.query("SELECT subject_id FROM subjects WHERE subject_name = $1" , [subject])
+                    const subject_id = data.rows[0].subject_id;
+                    const result = await db.query("UPDATE attendance_real SET conducted = conducted + 1 , attended = attended+1 WHERE rollno = $1 AND subject_id = $2",[i,subject_id]);
+                    
+                } catch (error) {
+                    return res.json({message : "something went wrong"})
+                }
+            //present studetn
+            
+           }
+
+        }
+    }
+    return res.json({result : "updated successfully"})
+    
 })
 export default router;

@@ -5,6 +5,7 @@ export const teacherState = atom({
     default : {
         id : 11201 , 
         name : 'Kolhatkar',
-        mobileno:1234567890
+        mobileno:1234567890,
+        subjects:[]
     }
 }) ;

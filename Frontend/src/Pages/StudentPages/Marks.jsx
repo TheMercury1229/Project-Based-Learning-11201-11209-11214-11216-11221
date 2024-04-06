@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Subject from "../../Components/StudentComponents/Subject-Card/Subject.jsx";
-import "../Css/Marks.css";
+import "../StudentCss/Css/Marks.css";
 import {
   AreaChart,
   Area,

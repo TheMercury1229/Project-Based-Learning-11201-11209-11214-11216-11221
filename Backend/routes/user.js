@@ -76,10 +76,19 @@ router.get("/me" , tokenVerify, async (req , res)=>{
         }else if(user_type == 'teacher')
         {
             try {
-                const data = await db.query("SELECT teacher_id , lname , teacher_mobileno FROM teachers WHERE teacher_id = $1" , [user_id]);
+                // const data = await db.query("SELECT teacher_id , lname , teacher_mobileno FROM teachers WHERE teacher_id = $1" , [user_id]);
+                const data = await db.query("SELECT teachers_real.teacher_id, teachers_real.lname, teachers_real.teacher_mobileno, teacher_subjects_real.subject_id, subjects.subject_name FROM teachers_real JOIN teacher_subjects_real ON teachers_real.teacher_id = teacher_subjects_real.teacher_id JOIN subjects ON teacher_subjects_real.subject_id = subjects.subject_id WHERE teachers_real.teacher_id = $1" , [user_id]);
                 console.log(data.rows);
                 let teacherData = data.rows[0];
-                return res.json({user_id : user_id , user_type : user_type,token:token,teacher_name : teacherData.lname, mobileno : teacherData.teacher_mobileno});
+                let subjects = [];
+                for(var i = 0;i<data.rows.length;i++)
+                {
+                    if(data.rows[i].subject_name)
+                    {
+                        subjects.push(data.rows[i].subject_name)
+                    }
+                }
+                return res.json({user_id : user_id , user_type : user_type,token:token,teacher_name : teacherData.lname, mobileno : teacherData.teacher_mobileno , teacherSubjects : subjects});
             } catch ({error}) {
                 return res.json({error : "there was an error"});
             }

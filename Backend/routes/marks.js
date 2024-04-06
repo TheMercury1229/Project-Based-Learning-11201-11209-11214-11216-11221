@@ -74,4 +74,72 @@ router.get("/getAllSubjectMarks" , tokenVerify,async  (req,res)=>{
     }
     return res.json({marks : object});
 })
+router.post("/dataOfTeacherMarks" , tokenVerify, async (req,res)=>{
+    const teacher_id = req.headers.user_id;
+    const subjects = req.body.subjects;
+    
+    if(teacher_id || subjects){
+        let array = [];
+        for(var j = 0 ;j < subjects.length;j++)
+        {
+            let subject = subjects[j];
+            let object = [];
+            for(var i = 11201;i<=11265;i++)
+            {
+                let thisOne = {};
+                if(i!=11204 && i!=11211)
+                {
+                try {
+                        thisOne.id = i;
+                       
+                        const data = await db.query("SELECT fname FROM students WHERE  rollno = $1",[i]);
+                        
+                        thisOne.name = data.rows[0].fname;
+                        thisOne.marks = 25;
+                       
+                } catch (error) {
+                        return res.json({message : error})
+                }
+
+                object.push(thisOne);
+                }
+            }
+            array.push(object);
+        }
+        return res.json({data:array});
+    }else{
+        return res.json({message : "please give all credentials"})
+    }
+
+})
+
+router.post("/updateMarks" , tokenVerify , async ( req ,res )=>{
+    const subject = req.headers.subject;
+    const array = req.body.array;
+    if(subject && array.length > 0 ){
+        try {
+            const data = await db.query("SELECT subject_id FROM subjects WHERE subject_name = $1" , [subject])
+            const subject_id = data.rows[0].subject_id;
+            for(var i = 0 ; i < array.length;i++)
+            {
+                const object = array[i];
+                const rollno = object.id;
+                const marks = object.marks;
+                try {
+                    const result = await db.query("UPDATE marks SET marks = $1 WHERE rollno = $2 and subject_id = $3",[marks,rollno , subject_id]);
+
+                } catch (error) {
+                    return res.json({message : "something went wrong in the loop"})
+                }
+            }
+            return res.json({result : "updated successfully "})
+        } catch (error) {
+            return res.json({message : "something went wrong"})
+        }
+
+    }else{
+        return res.json({message : "please provide all credentials"})
+    }
+       
+})
 export default router;

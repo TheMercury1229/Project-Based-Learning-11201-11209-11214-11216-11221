@@ -1,6 +1,6 @@
 import React from "react";
 import Subject from "../../Components/StudentComponents/Subject-Card/Subject";
-import "../Css/Attendance.css";
+import "../StudentCss/Css/Attendance.css";
 import {
   BarChart,
   Bar,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../Css/Home.css";
+import "../StudentCss/Css/Home.css";
 import Subject from "../../Components/StudentComponents/Subject-Card/Subject.jsx";
 import TimeTable from "../../Components/StudentComponents/TimeTable/Timetable.jsx";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -12,7 +12,7 @@ const Home = () => {
   console.log("this is in the home.jsx");
   console.log(attendance);
   useEffect(()=>{
-    console.log("useEffect in the home ran")
+    // console.log("useEffect in the home ran")
     fetch("http://localhost:3000/attendance/getAllSubjectAttendance" , {
       method : 'GET' ,
       headers : {

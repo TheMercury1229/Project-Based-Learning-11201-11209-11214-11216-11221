@@ -1,37 +1,35 @@
 import React from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+// import Header from "../Components/Header/Header";
+import Header from "../Components/TeacherComponents/Header/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Sidebar from "../Components/TeacherComponents/Sidebar/Sidebar";
+// Importing Pages
+import Home from "./TeacherPages/Home";
+import Marks from "./TeacherPages/Marks";
+import Attendance from "./TeacherPages/Attendance";
+import Profile from "./TeacherPages/Profile";
 import LoginSignup from "./LoginSignup";
-import TeacherHeader from "../Components/TeacherComponents/TeacherHeader/TeacherHeader";
-import TeacherSidebar from "../Components/TeacherComponents/TeacherSidebar/TeacherSidebar";
-import TeacherHome from "./TeacherPages/TeacherHome";
-const TeacherOutlet = () => {
-  const navigate = useNavigate();
-  return (
 
+const Outlet = () => {
+  return (
     <div>
       
-      
-    
+        <Header />
         <div className="container">
-          <TeacherHeader/>
-          <TeacherSidebar/>
-        
+          <Sidebar />
           <main>
             <Routes>
-              {/* <Route path="/" element={<Header />} index /> */}
-              {/* <Route path="/" element={<Sidebar />} index /> */}
-              <Route path="/" element={<TeacherHome />} index />
-              {/* <Route path="/teacher/marks" element={<Marks />} />
-              <Route path="/teacher/attendance" element={<Attendance />} />
-              <Route path="/teacher/settings" element={<Settings />} />
-              <Route path="/teacher/profile" element={<Profile />} /> */}
-              <Route path="/login" element={<LoginSignup />} />
+              <Route path="/" element={<Home />} index />
+              <Route path="/give-marks" element={<Marks />} />
+              <Route path="/give-attendance" element={<Attendance />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<LoginSignup/>}/>
             </Routes>
           </main>
         </div>
-        
+      
     </div>
   );
 };
 
-export default TeacherOutlet;
+export default Outlet;

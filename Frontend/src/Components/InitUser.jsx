@@ -51,7 +51,7 @@ const InitUser = () => {
                     }
                     if(data.teacher_name)
                     {
-                        const objectTeacher = {id : data.user_id, name : data.teacher_name,mobileno : data.mobileno};
+                        const objectTeacher = {id : data.user_id, name : data.teacher_name,mobileno : data.mobileno , subjects : data.teacherSubjects};
                         setTeacher(objectTeacher);
                         
                     }

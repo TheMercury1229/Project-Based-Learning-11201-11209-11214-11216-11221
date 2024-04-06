@@ -1,5 +1,5 @@
 import React from "react";
-import "../Css/Profile.css";
+import "../StudentCss/Css/Profile.css";
 import profileImg from "../../assets/assets/Profileimage.webp";
 import Button from "../../Components/Button/Button";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
