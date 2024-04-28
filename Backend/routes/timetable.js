@@ -50,21 +50,21 @@ router.get("/getTimeTable" , tokenVerify ,async (req,res)=>{
         result.Friday = friday;
         let saturday = [
             {
-              time: "09-10 AM",
-              roomNumber: "34-604",
-              subject: "DBMS130",
-              type: "Tutorial",
+              time: "8-10",
+              roomNumber: "f-304",
+              subject: "PBL-L",
+              type: "LAB",
             },
             {
-              time: "10-11 AM",
-              roomNumber: "34-604",
-              subject: "DBMS130",
+              time: "10.15-12 AM",
+              roomNumber: "A1-111",
+              subject: "CS",
               type: "Lecture",
             },
             {
               time: "01-02 PM",
-              roomNumber: "33-309",
-              subject: "MTH166",
+              roomNumber: "A1-111",
+              subject: "ES",
               type: "Lecture",
             },
           ]
