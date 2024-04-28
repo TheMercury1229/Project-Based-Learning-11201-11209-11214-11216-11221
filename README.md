@@ -1,4 +1,4 @@
-                                                                                            Student Performance Dashboard
+Student Performance Dashboard
 This project is a Student Performance Dashboard designed for teachers to track attendance and marks of students. It provides an interface for teachers to view and update attendance and marks records.
 
 Features
@@ -23,22 +23,32 @@ Deployment:
       Not hosted yet , in the future scope.
 Usage
 Clone the repository:
-    git clone https://github.com/TheMercury1229/Project-Based-Learning-11201-11209-11214-11216-11221.git
-Install dependencies for both frontend and backend:
+
+    git clone https://github.com/TheMercury1229/Project-Based-Learning-11201-11209-11214-11216-11221.git 
+                                                                        
+Install dependencies backend:
+
     cd Backend 
-        npm i
+    npm i
+    
+Install dependencies Frontend:
+
     cd Frontend 
-        npm i 
+    npm i 
     
 Set up environment variables:
     We have used env variables to for JWT secret , PSQL database password and username.
     
 Start the backend server:
+
       cd Backend
       npm start
+      
 Start the frontend development server:
+
       cd Frontend 
       npm run dev
+      
 Open your browser and navigate to http://localhost:5173 to view the Student Performance Dashboard.
 
 
@@ -52,11 +62,11 @@ Our Project Contributors :
 Contributing
 Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
-    Fork the repository.
-    Create a new branch (git checkout -b feature/my-feature).
-    Make your changes.
-    Commit your changes (git commit -am 'Add new feature').
-    Push to the branch (git push origin feature/my-feature).
-    Create a new Pull Request.
+Fork the repository.
+Create a new branch (git checkout -b feature/my-feature).
+Make your changes.
+Commit your changes (git commit -am 'Add new feature').
+Push to the branch (git push origin feature/my-feature).
+Create a new Pull Request.
 
 
